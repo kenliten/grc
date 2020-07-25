@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>GRC by kenliten</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/master.css">
+
+	<script src="js/vendor/all.min.js"></script>
+
+</head>
+<body>
+
+	<div class="text-center">
+		<h1 class="bg-primary text-light display-4 p-3"><span id="business-name"></span></h1>
+		<h3>Gestor de Relaciones con el Cliente</h3>
+		<hr>
+	</div>
+
+	<div class="container-fluid">
+		<h2 class="text-center">Clientes</h2>
+		<table class="table table-striped">
+		  <thead class="thead-ligth bg-primary text-light">
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Nombre</th>
+		      <th scope="col">Empresa</th>
+		      <th scope="col">Puesto</th>
+		      <th scope="col">Teléfono</th>
+		      <th scope="col">Email</th>
+		      <th scope="col">Acciones</th>
+		    </tr>
+		  </thead>
+		  <tbody id="customers">
+		  </tbody>
+		</table>
+	</div>
+
+	<button type="button" id="customer-registry-modal-op" class="btn rounded-circle btn-primary display-4" data-toggle="modal" data-target="#customer-registry-modal"><i class="fas fa-plus"></i></button>
+
+	<button type="button" id="settings-modal-op" class="btn rounded-circle btn-secondary display-4" data-toggle="modal" data-target="#settings-modal"><i class="fas fa-cog"></i></button>
+
+	<div class="modal" id="customer-registry-modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-xl modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>Registro de Clientes</h2>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+				</div>
+				<div class="modal-body">
+					<form id="customer-registry">
+					  <div class="row">
+						  <div class="form-group col">
+						    <label for="customer-name" title="Nombre completo del cliente">Nombre</label>
+						    <input type="text" class="form-control" id="customer-name" required>
+						  </div>
+						  <div class="form-group col">
+						    <label for="customer-company" title="Empresa en la que trabaja el cliente">Empresa</label>
+						    <input type="text" class="form-control" id="customer-company" required>
+						  </div>
+						  <div class="form-group col">
+						    <label for="customer-job" title="Puesto en que trabaja el cliente">Puesto</label>
+						    <input type="text" class="form-control" id="customer-job" required>
+						  </div>
+					  </div>
+					  <div class="row">
+						  <div class="form-group col">
+						    <label for="customer-email" title="Correo Electrónico del cliente">Email</label>
+						    <input type="email" class="form-control" id="customer-email" required>
+						  </div>
+						  <div class="form-group col">
+						    <label for="customer-phone" title="Número de teléfono del cliente">Teléfono</label>
+						    <input type="phone" class="form-control" id="customer-phone" required>
+						  </div>
+					  </div>
+						<div class="form-group form-check">
+						  <input type="checkbox" class="form-check-input" id="new-customer" checked>
+						  <label class="form-check-label" for="new-customer" title="¿Es la primera vez que interactuamos con el cliente?">Nuevo Cliente?</label>
+						</div>
+					  <div id="optional-info">
+						  <div class="row">
+							  <div class="form-group col">
+							    <label for="customer-sales" title="¿Cuánto ha comprado el cliente aproximadamente?">Volumen en Ventas</label>
+							    <input type="number" min="0" class="form-control" id="customer-sales">
+							  </div>
+							  <div class="form-group col">
+							    <label for="customer-last-contact">Último Contacto</label>
+							    <input type="date" min="1/1/2010" class="form-control" id="customer-last-contact">
+							  </div>
+							  <div class="form-group col">
+							    <label for="customer-next-action" title="Próximo movimiento a ejecutar">Próxima Acción</label>
+							    <select class="form-control" id="customer-next-action">
+							    	<option value="Promoción">Promoción</option>
+							    	<option value="Recordatorio">Recordatorio</option>
+							    	<option value="Descuento Especial">Descuento Especial</option>
+							    	<option value="Feedback">Feedback</option>
+							    </select>
+							  </div>
+							  <div class="form-group col">
+							    <label for="customer-next-contact">Próximo Contacto</label>
+							    <input type="date" min="1/1/2010" class="form-control" id="customer-next-contact">
+							  </div>
+						  </div>
+						  <div class="row">
+							  <div class="form-group col">
+							    <label for="customer-status">Estado</label>
+							    <select class="form-control" id="customer-status">
+							    	<option value="Activo">Activo</option>
+							    	<option value="Poco activo">Poco activo</option>
+							    	<option value="Inactivo">Inactivo</option>
+							    </select>
+							  </div>
+							  <div class="form-group col">
+							    <label for="customer-source">Fuente de Ingreso</label>
+							    <select class="form-control" id="customer-source">
+							    	<option value="Promoción">Promoción</option>
+							    	<option value="Referencia">Referencia</option>
+							    	<option value="Sitio Web">Sitio Web</option>
+							    </select>
+							  </div>
+							  <div class="form-group col">
+							    <label for="customer-owner">Encargado/a</label>
+							    <input type="text" class="form-control" id="customer-owner">
+							  </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="customer-notes">Notas</label>
+						    <textarea class="form-control" rows="6" id="customer-notes"></textarea>
+						  </div>
+					  </div>
+					  <div class="text-right">
+						  <button type="reset" class="btn btn-secondary">Reiniciar</button>
+						  <button type="submit" id="new-customer-submit" class="btn btn-primary">Guardar</button>
+					  </div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="settings-modal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>Configuración</h2>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="settings-business-name">Nombre del negocio</label>
+						<input type="text" class="form-control" id="settings-business-name">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="settings-save" class="btn btn-primary">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="customer-details-modal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>Detalles del cliente</h2>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+				</div>
+				<div class="modal-body" id="customer-details">
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="customer-details-edit-button" class="btn btn-primary">Editar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="customer-edit-modal">
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>Editar un Cliente</h2>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+				</div>
+				<div class="modal-body">
+					<form id="customer-edit">
+						<input type="hidden" id="customer-edit-target">
+					  <div class="row">
+						  <div class="form-group col">
+						    <label for="customer-edit-name" title="Nombre completo del cliente">Nombre</label>
+						    <input type="text" class="form-control" id="customer-edit-name" required>
+						  </div>
+						  <div class="form-group col">
+						    <label for="customer-edit-company" title="Empresa en la que trabaja el cliente">Empresa</label>
+						    <input type="text" class="form-control" id="customer-edit-company" required>
+						  </div>
+						  <div class="form-group col">
+						    <label for="customer-edit-job" title="Puesto en que trabaja el cliente">Puesto</label>
+						    <input type="text" class="form-control" id="customer-edit-job" required>
+						  </div>
+					  </div>
+					  <div class="row">
+						  <div class="form-group col">
+						    <label for="customer-edit-email" title="Correo Electrónico del cliente">Email</label>
+						    <input type="email" class="form-control" id="customer-edit-email" required>
+						  </div>
+						  <div class="form-group col">
+						    <label for="customer-edit-phone" title="Número de teléfono del cliente">Teléfono</label>
+						    <input type="phone" class="form-control" id="customer-edit-phone" required>
+						  </div>
+					  </div>
+					  <div class="row">
+						  <div class="form-group col">
+						    <label for="customer-edit-sales" title="¿Cuánto ha comprado el cliente aproximadamente?">Volumen en Ventas</label>
+						    <input type="number" min="0" class="form-control" id="customer-edit-sales">
+						  </div>
+						  <div class="form-group col">
+						    <label for="customer-edit-last-contact">Último Contacto</label>
+						    <input type="date" min="1/1/2010" class="form-control" id="customer-edit-last-contact">
+						  </div>
+						  <div class="form-group col">
+						    <label for="customer-edit-next-action" title="Próximo movimiento a ejecutar">Próxima Acción</label>
+						    <select class="form-control" id="customer-edit-next-action">
+						    	<option value="Promoción">Promoción</option>
+						    	<option value="Recordatorio">Recordatorio</option>
+						    	<option value="Descuento Especial">Descuento Especial</option>
+						    	<option value="Feedback">Feedback</option>
+						    </select>
+						  </div>
+						  <div class="form-group col">
+						    <label for="customer-edit-next-contact">Próximo Contacto</label>
+						    <input type="date" min="1/1/2010" class="form-control" id="customer-edit-next-contact">
+						  </div>
+					  </div>
+					  <div class="row">
+						  <div class="form-group col">
+						    <label for="customer-edit-status">Estado</label>
+						    <select class="form-control" id="customer-edit-status">
+						    	<option value="Activo">Activo</option>
+						    	<option value="Poco activo">Poco activo</option>
+						    	<option value="Inactivo">Inactivo</option>
+						    </select>
+						  </div>
+						  <div class="form-group col">
+						    <label for="customer-edit-source">Fuente de Ingreso</label>
+						    <select class="form-control" id="customer-edit-source">
+						    	<option value="Promoción">Promoción</option>
+						    	<option value="Referencia">Referencia</option>
+						    	<option value="Sitio Web">Sitio Web</option>
+						    </select>
+						  </div>
+						  <div class="form-group col">
+						    <label for="customer-edit-owner">Encargado/a</label>
+						    <input type="text" class="form-control" id="customer-edit-owner">
+						  </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="customer-edit-notes">Notas</label>
+					    <textarea class="form-control" rows="6" id="customer-edit-notes"></textarea>
+					  </div>
+					  <div class="text-right">
+						  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancelar</button>
+						  <button type="submit" id="edit-customer-submit" class="btn btn-primary">Guardar</button>
+					  </div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/vendor/jquery-3.4.1.slim.min.js"></script>
+	<script src="js/vendor/popper.min.js"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+
+	<script src="js/vendor/pouchdb-7.1.1.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+
+</body>
+</html>

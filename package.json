@@ -1,0 +1,27 @@
+{
+  "name": "grc",
+  "title": "GRC",
+  "version": "0.1.0",
+  "description": "Un Gestor de Relaciones con Clientes",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "serve": "http-server . -d -i -c-1",
+    "package:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=dist",
+    "package:win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=dist",
+    "package:win64": "electron-packager . --overwrite --platform=win32 --arch=x64 --out=dist",
+    "package:linux": "electron-packager . --overwrite --platform=linux --arch=ia32 --out=dist",
+    "package:linux64": "electron-packager . --overwrite --platform=linux --arch=x64 --out=dist"
+  },
+  "keywords": [],
+  "author": "kenliten",
+  "repository": "https://github.com/kenliten/grc",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "electron-packager": "^15.0.0",
+    "http-server": "^0.12.3"
+  },
+  "devDependencies": {
+    "electron": "^9.1.1"
+  }
+}
